@@ -69,7 +69,7 @@ chown -R wildfly:wildfly /var/log/wildfly
 # install wildfly as service
 
 # add wildfly Admin User
-~wildfly/bin/add-user.sh admin Smokey01 --silent
+~wildfly/bin/add-user.sh admin admin --silent
 
 #------------------- SET UP WILDFLY CONFIGURATION ---------------
 #Copy init scripts
