@@ -2,7 +2,6 @@
 currDir=$PWD
 jbossDir=/tmp/scripts/apps/JBOSS
 git clone https://github.com/RMelanson/linux-scripts-apps-jboss.git $jbossDir
-cd $devToolsDir
-chmod 744 setup.sh
+cd $jbossDir
 ./setup.sh
 cd $currDir
