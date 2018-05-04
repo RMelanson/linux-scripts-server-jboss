@@ -57,8 +57,9 @@ fi
 
 #------------------- DOWNLOAD AND INSTALL WILDFLY 10 ---------------
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
-tar -xzf #wfPkg -C /opt/wildfly --strip 1
-echo y | rm $wfPkg
+echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
+tar -xzf $wfPkg -C /opt/wildfly --strip 1
+echo y | rm $wfPkg 
 cd  /opt/wildfly
 
 #finally chown and groups to wildfly for home directory objects
