@@ -1,4 +1,6 @@
-#!/bin/bash
+#! /bin/bash
+# Setup the required environment
+. .env/setEnv.sh#
 
 currDir=$PWD
 wfPkg=wildfly-10.0.0.Final.tar.gz
