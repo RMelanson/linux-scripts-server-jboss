@@ -89,13 +89,14 @@ sed -i 's/# SHUTDOWN_WAIT/SHUTDOWN_WAIT/g' /etc/default/wildfly.conf
 sed -i 's/# JBOSS_CONSOLE_LOG/JBOSS_CONSOLE_LOG/g' /etc/default/wildfly.conf
 
 #Set the local hostname
-sed -i "s/127.0.0.1/$(hostname -I)/g" ~wildfly/standalone/configuration/standalone.xml
+cp ~wildfly/standalone/configuration/standalone.xml ~wildfly/standalone/configuration/standalone.xml.BAK
+#sed -i "s/127.0.0.1/$(hostname -I)/g" ~wildfly/standalone/configuration/standalone.xml
 
 #------------------- ADD WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
 
 chkconfig --add wildfly
-chkconfig wildfly on
-service wildfly start
+#chkconfig wildfly on
+#service wildfly start
 
 # start wildfly bind to all address
 #sudo -u wildfly /opt/wildfly/bin/standalone.sh -b=0.0.0.0 &
