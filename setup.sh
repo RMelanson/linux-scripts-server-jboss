@@ -16,14 +16,12 @@ fi
 # SET UP WILDFLY ADMIN USER
 wfAdmin=wildfly;
 wfGroup=wildfly
-pkg=wildfly
 wfHome=/opt/wildfly
-wfLog=/var/log/wildfly
-# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfLog $pkg
+pkg=wildfly
+# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # create required wildfly directories
 mkdir -p $wfHome
-mkdir -p $wfLog 
 
 #Check if wildfly user exists
 if grep -q $wfAdmin "/etc/passwd"; then
@@ -51,6 +49,9 @@ cd  /opt/wildfly
 #finally chown and groups to wildfly for home directory objects
 
 chown -R wildfly:wildfly ~wildfly
+
+wfLog=/var/log/wildfly
+mkdir -p $wfLog 
 chown -R wildfly:wildfly $wfLog
 # install wildfly as service
 
