@@ -1,4 +1,4 @@
-#ToDo Configure JBOSS
+# CONFIGURE JBOSS REMOTE ADMIN ACCESS
 wfHome=$1
 admUser=$2
 
