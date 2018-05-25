@@ -34,7 +34,8 @@ Read all copyright clauses and information before continuing to download and/or 
 - https://github.com/RMelanson/linux-scripts-bootstraps.git
 
 <img src="https://github.com/RMelanson/linux-scripts-bootstraps/blob/master/images/aboutMickey.png" width="6%" align= "right">
-- Version: 1.0.0
+- - - -
+- About Version: 1.0.0
 - Release Date: May 06 2018
 - Purpose: Bootstraps is a simplified installation package for many Linux packages and 3rd party apps alike.
 - Description: 'Bootstraps' package is a master bootstrap utility for downloading and installing various software bootstraps for software initialization on Linux. Bootstraps may be installed as a bootstrap or after the Linux system has been launched. 
