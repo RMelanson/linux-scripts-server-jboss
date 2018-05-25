@@ -5,6 +5,7 @@ Find your way using our directory below:
 
 - [Legal Disclaimer & Copyright Agreement ©](#copyright-agreement)
 - [Repository](#repository-information)
+- [About](#About)
 - [Installation Documentation](#installation-details)
 - [Package Contents](#package-contents)
 - [Running the Package](#running-the-package)
