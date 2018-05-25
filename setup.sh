@@ -15,7 +15,7 @@ wfHome=/opt/wildfly
 wfAdmin=wildfly
 wfGroup=wildfly
 wfJava=java-1.8.0-openjdk-devel
-wfPkg=wildfly
+pkg=wildfly
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
 # ./install/installJava8.sh
@@ -41,7 +41,7 @@ else
 fi
 
 # SET UP WILDFLY ADMIN USER
-# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfPkg
+# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # create wildfly directories
 mkdir -p /var/log/wildfly 
