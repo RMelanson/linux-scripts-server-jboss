@@ -2,6 +2,13 @@
 # Setup the required environment
 . ./env/setEnv.sh#
 
+#CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
+if [ -d $wfHome ]
+then
+    echo WildFly Already installed EXITING
+#    return
+fi
+
 wfCurrDir=$PWD
 wfPkg=wildfly-10.0.0.Final.tar.gz
 wfHome=/opt/wildfly
@@ -10,6 +17,9 @@ wfGroup=wildfly
 wfJava=java-1.8.0-openjdk-devel
 wfPkg=wildfly
 
+# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
+# ./install/installJava8.sh
+
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
     true
@@ -17,9 +27,6 @@ function isinstalled {
     false
   fi
 }
-
-# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-#./install/installJava8.sh
 
 #check if  java-1.8.0-openjdk-devel is installed
 if isinstalled $wfJava
@@ -33,15 +40,8 @@ else
    echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0" >> /etc/profile.d/java.sh
 fi
 
-#CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
-if [ -d $wfHome ]
-then
-    echo WildFly Already installed EXITING
-#    return
-fi
-
-#SET UP WILDFLY ADMIN USER
-#install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfPkg
+# SET UP WILDFLY ADMIN USER
+# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfPkg
 
 # create wildfly directories
 mkdir -p /var/log/wildfly 
@@ -78,7 +78,7 @@ chown -R wildfly:wildfly /var/log/wildfly
 ~wildfly/bin/add-user.sh admin admin --silent
 
 #------------------- SET UP WILDFLY CONFIGURATION ---------------
-./install/configurejBoss.sh
+# ./install/configurejBoss.sh
 #Copy init scripts
 
 echo y | cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
