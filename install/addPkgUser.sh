@@ -35,3 +35,5 @@ else
    #Add $user ssh access
    cp -r ~ec2-user/.ssh $home
 fi
+
+chown -R $user:$group $home
