@@ -1,7 +1,7 @@
 # WILDFLY INITIAL INSTALLATION SETUP
-wfHome=$1
-wfOwner$2
-wfGroup=$3
+wfOwner$1
+wfGroup=$2
+wfHome=$3
 wfLog=$4
 wfPkg=wildfly-10.0.0.Final.tar.gz
 
