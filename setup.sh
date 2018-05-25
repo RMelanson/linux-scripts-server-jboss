@@ -11,7 +11,7 @@ wfHome=/opt/wildfly
 pkg=wildfly
 
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
-. ./install/exitIfInstalled.sh
+. ./utils/exitIfInstalled.sh
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
 ./install/installJava8.sh
