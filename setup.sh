@@ -1,6 +1,6 @@
 #! /bin/bash
 # Setup the required environment
-. ./env/setEnv.sh#
+. ./env/setEnv.sh
 
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
 if [ -d $wfHome ]
