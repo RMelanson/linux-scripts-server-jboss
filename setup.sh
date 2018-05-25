@@ -14,7 +14,7 @@
 ./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
 
 # DOWNLOAD AND INSTALL WILDFLY 10
-./install/installjBoss10.sh $wfHome $wfOwner $wfGroup $wfLog
+./install/installjBoss10.sh $wfOwner $wfGroup $wfHome $wfLog
 
 # SET UP WILDFLY REMOTING CONFIGURATION 
 ./install/configjBossRemoting.sh $wfHome $wfAdmin
