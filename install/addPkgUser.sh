@@ -31,9 +31,7 @@ else
    fi
 
    useradd -M -s /bin/bash -g $group -d $home $user
-   chown $user:$group $home
    #Add $user ssh access
    cp -r ~ec2-user/.ssh $home
+   chown $user:$group $home
 fi
-
-chown -R $user:$group $home
