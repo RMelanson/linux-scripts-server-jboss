@@ -6,7 +6,7 @@
 if [ -d $wfHome ]
 then
     echo WildFly Already installed EXITING
-#    return
+    return
 fi
 
 wfCurrDir=$PWD
@@ -18,27 +18,7 @@ wfJava=java-1.8.0-openjdk-devel
 pkg=wildfly
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-# ./install/installJava8.sh
-
-function isinstalled {
-  if yum list installed "$@" >/dev/null 2>&1; then
-    true
-  else
-    false
-  fi
-}
-
-#check if  java-1.8.0-openjdk-devel is installed
-if isinstalled $wfJava
-then
-   echo Package $wfJava already installed
-#   return
-else
-   yum install $wfJava -y
-   echo 2 | /usr/sbin/alternatives --config java
-   echo 2 | /usr/sbin/alternatives --config javac
-   echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0" >> /etc/profile.d/java.sh
-fi
+./install/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
