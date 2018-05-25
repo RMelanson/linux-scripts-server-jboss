@@ -34,6 +34,7 @@ Read all copyright clauses and information before continuing to download and/or 
 - https://github.com/RMelanson/linux-scripts-bootstraps.git
 
 <img src="https://github.com/RMelanson/linux-scripts-bootstraps/blob/master/images/aboutMickey.png" width="6%" align= "right">
+
 - - - -
 - About Version: 1.0.0
 - Release Date: May 06 2018
