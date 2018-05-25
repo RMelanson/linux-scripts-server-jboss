@@ -16,6 +16,3 @@ wfLog=/var/log/wildfly
 mkdir -p $wfLog 
 chown -R wildfly:wildfly $wfLog
 # install wildfly as service
-
-# add wildfly Admin User
-$wfHome/bin/add-user.sh admin admin --silent
