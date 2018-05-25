@@ -1,18 +1,18 @@
+# WILDFLY INITIAL INSTALLATION SETUP
+wfHome=$1
 wfPkg=wildfly-10.0.0.Final.tar.gz
-wfPkg=$1
-wfHome=$2
+wfLog=/var/log/wildfly
 
+# DOWNLOAD WILDFLY
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C $wfHome --strip 1
+
+EXTRACT TO HOME DIRECTORY
 tar -xzf $wfPkg -C $wfHome --strip 1
 echo y | rm $wfPkg 
-cd  $wfHome
 
-#finally chown and groups to wildfly for home directory objects
+# CHANGE TO APPROPRIATE OWNER:GROUP
+chown -R wildfly:wildfly $wfHome
 
-chown -R wildfly:wildfly ~wildfly
-
-wfLog=/var/log/wildfly
 mkdir -p $wfLog 
 chown -R wildfly:wildfly $wfLog
-# install wildfly as service
