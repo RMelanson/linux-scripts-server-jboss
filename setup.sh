@@ -1,4 +1,5 @@
 #! /bin/bash
+wfCurrDir=$PWD
 # Setup the required environment
 . ./env/setEnv.sh
 
@@ -9,16 +10,13 @@ then
     return
 fi
 
-wfCurrDir=$PWD
-wfPkg=wildfly-10.0.0.Final.tar.gz
+# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
+./install/installJava8.sh
+
 wfHome=/opt/wildfly
 wfAdmin=wildfly
 wfGroup=wildfly
-wfJava=java-1.8.0-openjdk-devel
 pkg=wildfly
-
-# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-./install/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
@@ -41,6 +39,8 @@ fi
 
 # DOWNLOAD AND INSTALL WILDFLY 10
 # ./install/installjBoss.sh
+
+wfPkg=wildfly-10.0.0.Final.tar.gz
 
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
