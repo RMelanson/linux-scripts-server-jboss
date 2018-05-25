@@ -1,17 +1,10 @@
 #! /bin/bash
 wfCurrDir=$PWD
-# Setup the required environment
+# SETUP WILDFLY CONFIGURATION ENVIRONMENT AND PARAMETERS
 . ./env/setEnv.sh
 
-# SETUP WILDFLY CONFIGURATION PARAMETERS
-wfAdmin=admin
-wfOwner=wildfly;
-wfGroup=wildfly
-wfHome=/opt/wildfly
-pkg=wildfly
-
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
-. ./utils/exitIfInstalled.sh
+. ./utils/exitIfInstalled.sh $wfHome
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
 ./install/installJava8.sh
