@@ -1,3 +1,4 @@
+wfJava=java-1.8.0-openjdk-devel
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
     true
