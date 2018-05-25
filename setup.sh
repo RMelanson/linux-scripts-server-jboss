@@ -11,7 +11,7 @@
 ./install/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
-./install/addPkgUser.sh $wfOwner, wfGroup, $wfHome $pkg
+./install/addPkgUser.sh $wfOwner wfGroup $wfHome $pkg
 
 # DOWNLOAD AND INSTALL WILDFLY 10
 ./install/installjBoss10.sh $wfHome
