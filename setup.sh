@@ -18,51 +18,19 @@ wfAdmin=wildfly;
 wfGroup=wildfly
 wfHome=/opt/wildfly
 pkg=wildfly
-# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
-
-# create required wildfly directories
-mkdir -p $wfHome
-
-#Check if wildfly user exists
-if grep -q $wfAdmin "/etc/passwd"; then
-   echo Wildfly User $wfAdmin exists; Not adding
-else
-   # create wildfly user $wfAdmin and wildfly group $wfGroup
-   echo Adding wildflyuser $wfAdmin to group $wfGroup
-   groupadd $wfGroup
-   useradd -M -s /bin/bash -g $wfGroup -d /opt/wildfly $wfAdmin
-   # add wildfly ssh access
-   cp -r ~ec2-user/.ssh ~$wfAdmin
-fi
+./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # DOWNLOAD AND INSTALL WILDFLY 10
-# ./install/installjBoss.sh
-
 wfPkg=wildfly-10.0.0.Final.tar.gz
+./install/installjBoss.sh $wfPkg $wfHome
 
-wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
-echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
-tar -xzf $wfPkg -C /opt/wildfly --strip 1
-echo y | rm $wfPkg 
-cd  /opt/wildfly
+# SET UP WILDFLY REMOTING CONFIGURATION 
+./install/configjBossRemoting.sh $wfHome
 
-#finally chown and groups to wildfly for home directory objects
-
-chown -R wildfly:wildfly ~wildfly
-
-wfLog=/var/log/wildfly
-mkdir -p $wfLog 
-chown -R wildfly:wildfly $wfLog
-# install wildfly as service
-
-# add wildfly Admin User
-~wildfly/bin/add-user.sh admin admin --silent
-
-#------------------- SET UP WILDFLY CONFIGURATION ---------------
-# ./install/configurejBoss.sh
 #Copy init scripts
+# COPY AND CONFIGURE INIT SERVICE SCRIPTS
 
-echo y | cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
+echo y | cp $wfHome/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
 
 echo y | rm -f /etc/default/wildfly.conf
 cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly.conf /etc/default
@@ -74,11 +42,7 @@ sed -i 's/# STARTUP_WAIT/STARTUP_WAIT/g' /etc/default/wildfly.conf
 sed -i 's/# SHUTDOWN_WAIT/SHUTDOWN_WAIT/g' /etc/default/wildfly.conf
 sed -i 's/# JBOSS_CONSOLE_LOG/JBOSS_CONSOLE_LOG/g' /etc/default/wildfly.conf
 
-#Set the local hostname
-cp ~wildfly/standalone/configuration/standalone.xml ~wildfly/standalone/configuration/standalone.xml.BAK
-sed -i "s/127.0.0.1/$(hostname -I)/g" ~wildfly/standalone/configuration/standalone.xml
-
-#------------------- ADD WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
+# ADD WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
 
 chkconfig --add wildfly
 chkconfig wildfly on
