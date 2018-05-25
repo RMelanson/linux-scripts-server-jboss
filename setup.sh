@@ -2,12 +2,13 @@
 # Setup the required environment
 . ./env/setEnv.sh#
 
-currDir=$PWD
+wfCurrDir=$PWD
 wfPkg=wildfly-10.0.0.Final.tar.gz
-wfDir=/opt/wildfly
+wfHome=/opt/wildfly
 wfAdmin=wildfly
 wfGroup=wildfly
 wfJava=java-1.8.0-openjdk-devel
+wfPkg=wildfly
 
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
@@ -17,7 +18,9 @@ function isinstalled {
   fi
 }
 
-#------------------- DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT --------------------
+# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
+#./install/installJava8.sh
+
 #check if  java-1.8.0-openjdk-devel is installed
 if isinstalled $wfJava
 then
@@ -30,14 +33,15 @@ else
    echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0" >> /etc/profile.d/java.sh
 fi
 
-#---------------- CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED -----------------
-if [ -d $wfDir ]
+#CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
+if [ -d $wfHome ]
 then
     echo WildFly Already installed EXITING
 #    return
 fi
 
-#------------------- SET UP WILDFLY ADMIN USER --------------------
+#SET UP WILDFLY ADMIN USER
+#install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfPkg
 
 # create wildfly directories
 mkdir -p /var/log/wildfly 
@@ -55,9 +59,9 @@ else
    cp -r ~ec2-user/.ssh ~$wfAdmin
 fi
 
-# Set up wildfly environment variables
+# DOWNLOAD AND INSTALL WILDFLY 10
+# ./install/InstalljBoss.sh
 
-#------------------- DOWNLOAD AND INSTALL WILDFLY 10 ---------------
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
 tar -xzf $wfPkg -C /opt/wildfly --strip 1
@@ -74,6 +78,7 @@ chown -R wildfly:wildfly /var/log/wildfly
 ~wildfly/bin/add-user.sh admin admin --silent
 
 #------------------- SET UP WILDFLY CONFIGURATION ---------------
+./install/configurejBoss.sh
 #Copy init scripts
 
 echo y | cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
@@ -102,4 +107,4 @@ service wildfly start
 #sudo -u wildfly /opt/wildfly/bin/standalone.sh -b=0.0.0.0 &
 # or if you want to also bind the management port to all address
 #sudo -u wildfly /opt/wildfly/bin/standalone.sh -b=0.0.0.0 -bmanagement=0.0.0.0 &
-cd $currDir
+cd $wfCurrDir
