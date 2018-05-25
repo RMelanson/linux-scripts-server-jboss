@@ -14,12 +14,12 @@
 ./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
 
 # DOWNLOAD AND INSTALL WILDFLY 10
-./install/installjBoss10.sh $wfHome
+./install/installjBoss10.sh $wfHome $wfOwner $wfGroup $wfLog
 
 # SET UP WILDFLY REMOTING CONFIGURATION 
 ./install/configjBossRemoting.sh $wfHome $wfAdmin
 
-# CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
+# CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
 ./install/addjBossAsService.sh $wfHome 
 
 # START JBOSS WILDFLY
