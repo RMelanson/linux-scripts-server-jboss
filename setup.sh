@@ -13,17 +13,17 @@ fi
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
 ./install/installJava8.sh
 
-wfHome=/opt/wildfly
-wfAdmin=wildfly
+# SET UP WILDFLY ADMIN USER
+wfAdmin=wildfly;
 wfGroup=wildfly
 pkg=wildfly
+wfHome=/opt/wildfly
+wfLog=/var/log/wildfly
+# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $wfLog $pkg
 
-# SET UP WILDFLY ADMIN USER
-# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
-
-# create wildfly directories
-mkdir -p /var/log/wildfly 
-mkdir -p /opt/wildfly
+# create required wildfly directories
+mkdir -p $wfHome
+mkdir -p $wfLog 
 
 #Check if wildfly user exists
 if grep -q $wfAdmin "/etc/passwd"; then
@@ -51,7 +51,7 @@ cd  /opt/wildfly
 #finally chown and groups to wildfly for home directory objects
 
 chown -R wildfly:wildfly ~wildfly
-chown -R wildfly:wildfly /var/log/wildfly
+chown -R wildfly:wildfly $wfLog
 # install wildfly as service
 
 # add wildfly Admin User
