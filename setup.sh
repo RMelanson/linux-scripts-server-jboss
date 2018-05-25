@@ -40,7 +40,7 @@ else
 fi
 
 # DOWNLOAD AND INSTALL WILDFLY 10
-# ./install/InstalljBoss.sh
+# ./install/installjBoss.sh
 
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
