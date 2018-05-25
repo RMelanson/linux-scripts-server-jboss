@@ -1,5 +1,6 @@
 #! /bin/bash
-wfCurrDir=$PWD
+# INSTALL JBOSS ON LINUX WITH REMOTE ACCESS AS A SERVICE
+
 # SETUP WILDFLY CONFIGURATION ENVIRONMENT AND PARAMETERS
 . ./env/setEnv.sh
 
@@ -19,9 +20,7 @@ wfCurrDir=$PWD
 ./install/configjBossRemoting.sh $wfHome $wfAdmin
 
 # CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
-addjBossAsService.sh $wfHome 
+./install/addjBossAsService.sh $wfHome 
 
 # START JBOSS WILDFLY
 service wildfly start
-
-cd $wfCurrDir
