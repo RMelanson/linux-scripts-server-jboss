@@ -1,5 +1,5 @@
 # WILDFLY INITIAL INSTALLATION SETUP
-wfOwner$1
+wfOwner=$1
 wfGroup=$2
 wfHome=$3
 wfLog=$4
