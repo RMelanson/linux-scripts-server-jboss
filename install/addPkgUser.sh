@@ -26,7 +26,7 @@ else
    then
         echo "group exists"
    else
-        echo "group does not exist"
+        echo "Creating group $group"
         groupadd $group
    fi
 
