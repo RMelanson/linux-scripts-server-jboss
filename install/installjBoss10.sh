@@ -5,6 +5,8 @@ wfHome=$3
 wfLog=$4
 wfPkg=wildfly-10.0.0.Final.tar.gz
 
+echo Executing $0 $1 $2 $3 $4
+
 # DOWNLOAD WILDFLY
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C $wfHome --strip 1
