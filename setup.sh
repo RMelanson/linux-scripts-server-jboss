@@ -37,6 +37,9 @@ chown -R wildfly:wildfly $wfLog
 $wfHome/bin/add-user.sh admin admin --silent
 
 ##################################################################################
+# SET UP WILDFLY REMOTING CONFIGURATION 
+./install/configjBossRemoting.sh $wfHome $wfAdmin
+
 # CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
 ./install/addjBossAsService.sh $wfHome 
 
