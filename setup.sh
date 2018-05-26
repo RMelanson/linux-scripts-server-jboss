@@ -25,7 +25,6 @@ wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
 echo EXECUTING tar -xzf $wfPkg -C $wfHome --strip 1
 tar -xzf $wfPkg -C $wfHome --strip 1
 echo y | rm $wfPkg 
-cd  $wfHome
 
 #finally chown and groups to wildfly for home directory objects
 
