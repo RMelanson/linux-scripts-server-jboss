@@ -36,7 +36,7 @@ wfCurrDir=$PWD
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # create wildfly directories
-mkdir -p $wfHome
+#mkdir -p $wfHome
 
 #Check if wildfly user exists
 #if grep -q $wfAdmin "/etc/passwd"; then
