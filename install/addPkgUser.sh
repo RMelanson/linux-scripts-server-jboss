@@ -1,6 +1,6 @@
-if [ "$#" -lt 4 ]
+f [ "$#" -lt 4 ]
 then
-    echo "Illegal number of parameters"
+    echo "Illegal number of parameters $#"
 fi
 
 user=$1
@@ -8,7 +8,7 @@ group=$2
 home=$3
 pkg=$4
 
-echo Adding user $user, group, $group with home $home for pkg $pkg
+echo Adding user=$user, group=$group, home=$home pkg=$pkg
 
 #Check if $pkg admin user exists
 if grep -q $user "/etc/passwd"; then
@@ -26,12 +26,12 @@ else
    then
         echo "group exists"
    else
-        echo "group does not exist"
+        echo "Creating group $group"
         groupadd $group
    fi
 
    useradd -M -s /bin/bash -g $group -d $home $user
+   chown $user:$group $home
    #Add $user ssh access
    cp -r ~ec2-user/.ssh $home
-   chown $user:$group $home
 fi
