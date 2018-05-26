@@ -19,7 +19,7 @@ fi
 #pkg=wildfly
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-./install/installJava8.sh
+# ./install/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
@@ -51,12 +51,12 @@ cd  /opt/wildfly
 
 #finally chown and groups to wildfly for home directory objects
 
-chown -R wildfly:wildfly ~wildfly
+chown -R wildfly:wildfly $wfHome
 chown -R wildfly:wildfly /var/log/wildfly
 # install wildfly as service
 
 # add wildfly Admin User
-~wildfly/bin/add-user.sh admin admin --silent
+$wfHome/bin/add-user.sh admin admin --silent
 
 #------------------- SET UP WILDFLY CONFIGURATION ---------------
 # ./install/configurejBoss.sh
@@ -75,8 +75,8 @@ sed -i 's/# SHUTDOWN_WAIT/SHUTDOWN_WAIT/g' /etc/default/wildfly.conf
 sed -i 's/# JBOSS_CONSOLE_LOG/JBOSS_CONSOLE_LOG/g' /etc/default/wildfly.conf
 
 #Set the local hostname
-cp ~wildfly/standalone/configuration/standalone.xml ~wildfly/standalone/configuration/standalone.xml.BAK
-sed -i "s/127.0.0.1/$(hostname -I)/g" ~wildfly/standalone/configuration/standalone.xml
+cp $wfHome/standalone/configuration/standalone.xml $wfHome/standalone/configuration/standalone.xml.BAK
+sed -i "s/127.0.0.1/$(hostname -I)/g" $wfHome/standalone/configuration/standalone.xml
 
 #------------------- ADD WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
 
