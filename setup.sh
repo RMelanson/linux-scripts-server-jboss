@@ -5,12 +5,12 @@ wfCurrDir=$PWD
 . ./env/setEnv.sh
 
 ########################################################################
-#wfPkg=wildfly-10.0.0.Final.tar.gz
 #wfHome=/opt/wildfly
 #wfAdmin=wildfly
 #wfGroup=wildfly
 #wfJava=java-1.8.0-openjdk-devel
 #pkg=wildfly
+#wfLog=/var/log/wildfly
 
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
 . ./utils/exitIfInstalled.sh $wfHome
@@ -36,20 +36,19 @@ wfCurrDir=$PWD
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # create wildfly directories
-mkdir -p /var/log/wildfly 
 mkdir -p $wfHome
 
 #Check if wildfly user exists
-if grep -q $wfAdmin "/etc/passwd"; then
-   echo Wildfly User $wfAdmin exists; Not adding
-else
+#if grep -q $wfAdmin "/etc/passwd"; then
+#   echo Wildfly User $wfAdmin exists; Not adding
+#else
    # create wildfly user $wfAdmin and wildfly group $wfGroup
-   echo Adding wildflyuser $wfAdmin to group $wfGroup
-   groupadd $wfGroup
-   useradd -M -s /bin/bash -g $wfGroup -d $wfHome $wfAdmin
+#   echo Adding wildflyuser $wfAdmin to group $wfGroup
+#   groupadd $wfGroup
+#   useradd -M -s /bin/bash -g $wfGroup -d $wfHome $wfAdmin
    # add wildfly ssh access
-   cp -r ~ec2-user/.ssh ~$wfAdmin
-fi
+#   cp -r ~ec2-user/.ssh ~$wfAdmin
+#fi
 
 # DOWNLOAD AND INSTALL WILDFLY 10
 # ./install/installjBoss.sh
@@ -62,8 +61,9 @@ cd  $wfHome
 
 #finally chown and groups to wildfly for home directory objects
 
+mkdir -p $wfLog
 chown -R wildfly:wildfly $wfHome
-chown -R wildfly:wildfly /var/log/wildfly
+chown -R wildfly:wildfly $wfLog
 # install wildfly as service
 
 # add wildfly Admin User
