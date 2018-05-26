@@ -4,13 +4,7 @@ wfCurrDir=$PWD
 # Setup the required environment
 . ./env/setEnv.sh
 
-#CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
-if [ -d $wfHome ]
-then
-    echo WildFly Already installed EXITING
-    return
-fi
-
+########################################################################
 #wfPkg=wildfly-10.0.0.Final.tar.gz
 #wfHome=/opt/wildfly
 #wfAdmin=wildfly
@@ -18,15 +12,32 @@ fi
 #wfJava=java-1.8.0-openjdk-devel
 #pkg=wildfly
 
-# DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-# ./install/installJava8.sh
+#CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
+. ./utils/exitIfInstalled.sh $wfHome
+
+# SET UP WILDFLY ADMIN USER
+./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
+
+# DOWNLOAD AND INSTALL WILDFLY 10
+#./install/installjBoss10.sh $wfOwner $wfGroup $wfHome $wfLog
+
+# SET UP WILDFLY REMOTING CONFIGURATION 
+#./install/configjBossRemoting.sh $wfHome $wfAdmin
+
+# CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
+#./install/addjBossAsService.sh $wfHome 
+
+# START JBOSS WILDFLY
+#service wildfly start
+
+#########################################################################
 
 # SET UP WILDFLY ADMIN USER
 # ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
 
 # create wildfly directories
 mkdir -p /var/log/wildfly 
-mkdir -p /opt/wildfly
+mkdir -p $wfHome
 
 #Check if wildfly user exists
 if grep -q $wfAdmin "/etc/passwd"; then
@@ -35,7 +46,7 @@ else
    # create wildfly user $wfAdmin and wildfly group $wfGroup
    echo Adding wildflyuser $wfAdmin to group $wfGroup
    groupadd $wfGroup
-   useradd -M -s /bin/bash -g $wfGroup -d /opt/wildfly $wfAdmin
+   useradd -M -s /bin/bash -g $wfGroup -d $wfHome $wfAdmin
    # add wildfly ssh access
    cp -r ~ec2-user/.ssh ~$wfAdmin
 fi
@@ -44,10 +55,10 @@ fi
 # ./install/installjBoss.sh
 
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
-echo EXECUTING tar -xzf $wfPkg -C /opt/wildfly --strip 1
-tar -xzf $wfPkg -C /opt/wildfly --strip 1
+echo EXECUTING tar -xzf $wfPkg -C $wfHome --strip 1
+tar -xzf $wfPkg -C $wfHome --strip 1
 echo y | rm $wfPkg 
-cd  /opt/wildfly
+cd  $wfHome
 
 #finally chown and groups to wildfly for home directory objects
 
@@ -62,10 +73,10 @@ $wfHome/bin/add-user.sh admin admin --silent
 # ./install/configurejBoss.sh
 #Copy init scripts
 
-echo y | cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
+echo y | cp $wfHome/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
 
 echo y | rm -f /etc/default/wildfly.conf
-cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly.conf /etc/default
+cp $wfHome/docs/contrib/scripts/init.d/wildfly.conf /etc/default
 sed -i 's/# JAVA_HOME="\/usr\/lib\/jvm\/default-java"/JAVA_HOME=\/usr\/lib\/jvm\/java-1.8.0/g' /etc/default/wildfly.conf
 sed -i 's/# JBOSS_HOME/JBOSS_HOME/g' /etc/default/wildfly.conf
 sed -i 's/# JBOSS_USER/JBOSS_USER/g' /etc/default/wildfly.conf
@@ -84,8 +95,4 @@ chkconfig --add wildfly
 chkconfig wildfly on
 service wildfly start
 
-# start wildfly bind to all address
-#sudo -u wildfly /opt/wildfly/bin/standalone.sh -b=0.0.0.0 &
-# or if you want to also bind the management port to all address
-#sudo -u wildfly /opt/wildfly/bin/standalone.sh -b=0.0.0.0 -bmanagement=0.0.0.0 &
 cd $wfCurrDir
