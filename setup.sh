@@ -1,16 +1,6 @@
 #! /bin/bash
-wfCurrDir=$PWD
-
 # Setup the required environment
 . ./env/setEnv.sh
-
-########################################################################
-#wfHome=/opt/wildfly
-#wfAdmin=wildfly
-#wfGroup=wildfly
-#wfJava=java-1.8.0-openjdk-devel
-#pkg=wildfly
-#wfLog=/var/log/wildfly
 
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
 . ./utils/exitIfInstalled.sh $wfHome
@@ -76,5 +66,3 @@ sed -i "s/127.0.0.1/$(hostname -I)/g" $wfHome/standalone/configuration/standalon
 chkconfig --add wildfly
 chkconfig wildfly on
 service wildfly start
-
-cd $wfCurrDir
