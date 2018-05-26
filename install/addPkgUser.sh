@@ -19,7 +19,7 @@ else
    if [ ! -d $home ]
    then
       echo $home does not exist \*\*\* CREATING \*\*\*
-      mkdir $home
+      mkdir -p $home
    fi
    echo Adding $pkg admin user $user to group $group
    if grep -q $group /etc/group
