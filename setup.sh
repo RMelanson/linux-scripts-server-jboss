@@ -8,7 +8,7 @@
 . ./utils/exitIfInstalled.sh $wfHome
 
 # DOWNLOAD AND INSTALL JAVA 8 AND MAKE DEFAULT
-./install/installJava8.sh
+#./install/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
 ./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
