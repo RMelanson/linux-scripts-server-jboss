@@ -1,4 +1,4 @@
-f [ "$#" -lt 4 ]
+if [ "$#" -lt 4 ]
 then
     echo "Illegal number of parameters $#"
 fi
