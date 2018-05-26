@@ -64,8 +64,8 @@ $wfHome/bin/add-user.sh admin admin --silent
 #service wildfly start
 ##################################################################################
 # CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
-#./install/addjBossAsService.sh $wfHome 
+./install/addjBossAsService.sh $wfHome 
 
 # START JBOSS WILDFLY
-#service wildfly start
+service wildfly start
 
