@@ -32,24 +32,6 @@ wfCurrDir=$PWD
 
 #########################################################################
 
-# SET UP WILDFLY ADMIN USER
-# ./install/addPkgUser.sh $wfAdmin, wfGroup, $wfHome $pkg
-
-# create wildfly directories
-#mkdir -p $wfHome
-
-#Check if wildfly user exists
-#if grep -q $wfAdmin "/etc/passwd"; then
-#   echo Wildfly User $wfAdmin exists; Not adding
-#else
-   # create wildfly user $wfAdmin and wildfly group $wfGroup
-#   echo Adding wildflyuser $wfAdmin to group $wfGroup
-#   groupadd $wfGroup
-#   useradd -M -s /bin/bash -g $wfGroup -d $wfHome $wfAdmin
-   # add wildfly ssh access
-#   cp -r ~ec2-user/.ssh ~$wfAdmin
-#fi
-
 # DOWNLOAD AND INSTALL WILDFLY 10
 # ./install/installjBoss.sh
 
