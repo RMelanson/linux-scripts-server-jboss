@@ -16,12 +16,6 @@
 # SET UP WILDFLY REMOTING CONFIGURATION 
 #./install/configjBossRemoting.sh $wfHome $wfAdmin
 
-# CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
-#./install/addjBossAsService.sh $wfHome 
-
-# START JBOSS WILDFLY
-#service wildfly start
-
 #########################################################################
 
 # DOWNLOAD AND INSTALL WILDFLY 10
@@ -47,24 +41,31 @@ $wfHome/bin/add-user.sh admin admin --silent
 # ./install/configurejBoss.sh
 #Copy init scripts
 
-echo y | cp $wfHome/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
+#echo y | cp $wfHome/docs/contrib/scripts/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly
 
-echo y | rm -f /etc/default/wildfly.conf
-cp $wfHome/docs/contrib/scripts/init.d/wildfly.conf /etc/default
-sed -i 's/# JAVA_HOME="\/usr\/lib\/jvm\/default-java"/JAVA_HOME=\/usr\/lib\/jvm\/java-1.8.0/g' /etc/default/wildfly.conf
-sed -i 's/# JBOSS_HOME/JBOSS_HOME/g' /etc/default/wildfly.conf
-sed -i 's/# JBOSS_USER/JBOSS_USER/g' /etc/default/wildfly.conf
-sed -i 's/# JBOSS_CONFIG/JBOSS_CONFIG/g' /etc/default/wildfly.conf
-sed -i 's/# STARTUP_WAIT/STARTUP_WAIT/g' /etc/default/wildfly.conf
-sed -i 's/# SHUTDOWN_WAIT/SHUTDOWN_WAIT/g' /etc/default/wildfly.conf
-sed -i 's/# JBOSS_CONSOLE_LOG/JBOSS_CONSOLE_LOG/g' /etc/default/wildfly.conf
+#echo y | rm -f /etc/default/wildfly.conf
+#cp $wfHome/docs/contrib/scripts/init.d/wildfly.conf /etc/default
+#sed -i 's/# JAVA_HOME="\/usr\/lib\/jvm\/default-java"/JAVA_HOME=\/usr\/lib\/jvm\/java-1.8.0/g' /etc/default/wildfly.conf
+#sed -i 's/# JBOSS_HOME/JBOSS_HOME/g' /etc/default/wildfly.conf
+#sed -i 's/# JBOSS_USER/JBOSS_USER/g' /etc/default/wildfly.conf
+#sed -i 's/# JBOSS_CONFIG/JBOSS_CONFIG/g' /etc/default/wildfly.conf
+#sed -i 's/# STARTUP_WAIT/STARTUP_WAIT/g' /etc/default/wildfly.conf
+#sed -i 's/# SHUTDOWN_WAIT/SHUTDOWN_WAIT/g' /etc/default/wildfly.conf
+#sed -i 's/# JBOSS_CONSOLE_LOG/JBOSS_CONSOLE_LOG/g' /etc/default/wildfly.conf
 
 #Set the local hostname
-cp $wfHome/standalone/configuration/standalone.xml $wfHome/standalone/configuration/standalone.xml.BAK
-sed -i "s/127.0.0.1/$(hostname -I)/g" $wfHome/standalone/configuration/standalone.xml
+#cp $wfHome/standalone/configuration/standalone.xml $wfHome/standalone/configuration/standalone.xml.BAK
+#sed -i "s/127.0.0.1/$(hostname -I)/g" $wfHome/standalone/configuration/standalone.xml
 
 #------------------- ADD WILDFLY AS A SERVICE AND START WILDFLY SERVICE ---------------
 
-chkconfig --add wildfly
-chkconfig wildfly on
-service wildfly start
+#chkconfig --add wildfly
+#chkconfig wildfly on
+#service wildfly start
+##################################################################################
+# CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
+#./install/addjBossAsService.sh $wfHome 
+
+# START JBOSS WILDFLY
+#service wildfly start
+
