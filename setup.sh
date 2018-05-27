@@ -7,6 +7,9 @@
 #CHECK IF WILDFLY INSTALLED AND RETURN IF INSTALLED
 . ./utils/exitIfInstalled.sh $wfHome
 
+# INSTALL REQUIRED DEVELOPMENT LIBRARIES
+./install//installJava8.sh
+
 # SET UP WILDFLY ADMIN USER
 ./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
 
