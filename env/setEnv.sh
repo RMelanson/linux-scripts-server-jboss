@@ -1,6 +1,6 @@
 # WILDFLY CONFIGURATION PARAMETERS
 pkg=wildfly
-wfAdmin=wildfly
+wfAdmin=admin
 wfOwner=wildfly
 wfGroup=wildfly
 wfHome=/opt/wildfly
