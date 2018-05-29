@@ -7,7 +7,11 @@ if [ "$EUID" -ne 0 ]
   exit -1
 fi
 
-if [ -z "$1" ]; then
+#INITIAL BASIC TOOLS INSTALL
+yum update -y
+
+#INSTALL GIT
+yum install git -yif [ -z "$1" ]; then
    branch=master
 else
    branch=$1
