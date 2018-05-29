@@ -11,11 +11,9 @@ fi
 yum update -y
 
 #INSTALL GIT
-yum install git -y#INITIAL BASIC TOOLS INSTALL
-yum update -y
+yum install git -y
 
-#INSTALL GIT
-yum install git -yif [ -z "$1" ]; then
+if [ -z "$1" ]; then
    branch=master
 else
    branch=$1
