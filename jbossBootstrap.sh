@@ -34,6 +34,6 @@ cd $installDir
 find . -name "*.sh" -exec chmod 700 {} \;
 
 # Setup Project
-./setup
+./setup 2>&1| tee setup.log
 
 cd $jbossBootCurrDir
