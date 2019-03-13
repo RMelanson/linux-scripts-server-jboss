@@ -8,19 +8,19 @@
 . ./utils/exitIfInstalled.sh $wfHome
 
 # INSTALL REQUIRED DEVELOPMENT LIBRARIES
-./install/installJava8.sh
+./installs/installJava8.sh
 
 # SET UP WILDFLY ADMIN USER
-./install/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
+./installs/addPkgUser.sh $wfOwner $wfGroup $wfHome $pkg
 
 # DOWNLOAD AND INSTALL WILDFLY 10
-./install/installjBoss10.sh $wfOwner $wfGroup $wfHome $wfLog
+./installs/installjBoss10.sh $wfOwner $wfGroup $wfHome $wfLog
 
 # SET UP WILDFLY REMOTING CONFIGURATION 
-./install/configjBossRemoting.sh $wfHome $wfAdmin
+./installs/configjBossRemoting.sh $wfHome $wfAdmin
 
 # CONFIGURE WILDFLY AS A SERVICE AND START WILDFLY SERVICE
-./install/addjBossAsService.sh $wfHome 
+./installs/addjBossAsService.sh $wfHome 
 
 # START JBOSS WILDFLY
 service wildfly start
