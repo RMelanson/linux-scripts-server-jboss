@@ -13,8 +13,9 @@ yum update -y
 #INSTALL GIT
 yum install git -y
 
-#Set Cloning Properties
-pkg=JBOSS
+# SETUP ENVIRONMENT AND PARAMETERS
+. ./env/setEnv.sh
+
 gitRepo="linux-scripts-apps-jboss.git $jbossDir"
 installDir="/tmp/scripts/apps/JBOSS"
 if [ -f ~/.ssh/gitHub.key ]; then
