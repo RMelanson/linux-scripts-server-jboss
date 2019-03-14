@@ -1,4 +1,5 @@
-# WILDFLY CONFIGURATION PARAMETERS
+#!/bin/bash
+# JBOSS WILDFLY CONFIGURATION PARAMETERS
 pkg=wildfly
 wfAdmin=admin
 wfOwner=wildfly
