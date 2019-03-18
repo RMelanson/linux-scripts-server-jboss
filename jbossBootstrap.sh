@@ -16,7 +16,7 @@ yum install git -y
 # SETUP ENVIRONMENT AND PARAMETERS
 jbossBootCurrDir=$PWD
 pkg=JBOSS
-gitRepo="linux-scripts-apps-jboss.git $jbossDir"
+gitRepo="linux-scripts-apps-jboss.git"
 installDir="/tmp/scripts/apps/$pkg"
 
 if [ -f ~/.ssh/gitHub.key ]; then
