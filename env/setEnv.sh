@@ -1,11 +1,15 @@
 #!/bin/bash
 
 # JBOSS WILDFLY CONFIGURATION PARAMETERS
-pkg=JBOSS
 bootstrap="jbossBootstrap.sh"
-
 gitRepo="linux-scripts-apps-jboss.git $jbossDir"
-installDir="/tmp/scripts/apps/$pkg"
+
+#SET UP INSTALLATION DIRECTORY`
+pkg=JBOSS
+scriptType="utils"
+parentDir="/tmp/scripts/$scriptType/"
+installDir="$parentDir/$pkg"
+
 wfAdmin=admin
 wfOwner=wildfly
 wfGroup=wildfly
