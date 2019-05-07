@@ -1,8 +1,8 @@
 #!/bin/bash
-jbossBootCurrDir=$PWD
+bootstrapDir=$PWD
+bootstrap=$bootstrapDir/devToolsBootstrap.sh
 
 # Ensure script is running under root
-bootstrap=$webCurrDir/jbossBootstrap.sh
 if [ "$EUID" -ne 0 ]
 then
    sudo -n true 2/dev/null 2>&1
