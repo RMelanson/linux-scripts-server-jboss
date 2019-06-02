@@ -2,6 +2,8 @@
 # INSTALL JBOSS ON LINUX WITH REMOTE ACCESS AS A SERVICE
 
 # SETUP WILDFLY CONFIGURATION ENVIRONMENT AND PARAMETERS
+setupName=setup.sh
+echo "$setupName: EXECUTING: . ./env/setEnv.sh $*"
 . ./env/setEnv.sh $*
 
 # COPY RESTORE 
